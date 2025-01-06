@@ -1,5 +1,5 @@
 class LikesController < ApplicationController
-  before_action :set_like, only: %i[ show edit update destroy ]
+  before_action :set_like, only: %i[show edit update destroy]
 
   # GET /likes or /likes.json
   def index
@@ -32,10 +32,6 @@ class LikesController < ApplicationController
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @like.errors, status: :unprocessable_entity }
-        respond_to do |format|
-        format.html { redirect_back fallback_location: root_url, notice: "Like was successfully destroyed." }
-        format.json { head :no_content }
-        format.js
       end
     end
   end
@@ -63,13 +59,14 @@ class LikesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_like
-      @like = Like.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def like_params
-      params.require(:like).permit(:fan_id, :photo_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_like
+    @like = Like.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def like_params
+    params.require(:like).permit(:fan_id, :photo_id)
+  end
 end
